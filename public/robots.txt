@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://walkography.eu/sitemap-index.xml

@@ -1,0 +1,279 @@
+---
+import { getCollection, render } from 'astro:content';
+import Footer from '../../components/Footer.astro';
+import Hamburger from '../../components/Hamburger.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('theory');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+// Carica i correlati specificati nel frontmatter del post
+const correlati = [];
+if (post.data.correlati) {
+  for (const ref of post.data.correlati) {
+    const collezione = await getCollection(ref.sezione);
+    const trovato = collezione.find(p => p.id === ref.slug);
+    if (trovato) {
+      correlati.push({ ...trovato, sezione: ref.sezione });
+    }
+  }
+}
+
+// Mappa per i colori delle card
+const colori: Record<string, string> = {
+  theory: 'rosso',
+  atlas: 'azzurro',
+  funzone: 'giallo',
+  laboratory: 'verde',
+  news: 'vuota',
+};
+---
+
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{post.data.titolo} — Walkography</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <Hamburger />
+    <header class="testata">
+      <div></div>
+      <div class="titolo-blocco">
+        <a href="/" class="link-titolo">
+          <h1>WALKOGRAPHY</h1>
+          <p class="sottotitolo">Hic et Nunc cartographies</p>
+        </a>
+      </div>
+    </header>
+
+  <nav class="navigazione">
+    <a href="/theory" style="color: var(--rosso)">Theory</a>
+    <a href="/laboratory">Laboratory</a>
+    <a href="/atlas">Atlas</a>
+    <a href="/funzone">Funzone</a>
+  </nav>
+
+    <article class="post">
+      <span class="post-data">{post.data.data.toLocaleDateString('it-IT')} </span>
+      <h2 class="post-titolo">{post.data.titolo}</h2>
+      {post.data.immagine && <img src={post.data.immagine} alt="" class="post-immagine" />}
+      <div class="post-corpo">
+        <Content />
+      </div>
+    </article>
+
+    {correlati.length > 0 && (
+      <section class="correlati">
+        <h3 class="correlati-titolo">Related entries</h3>
+        <div class="correlati-griglia">
+          {correlati.map((c) => (
+            <a href={`/${c.sezione}/${c.id}`} class={`card card-${colori[c.sezione]} card-${c.data.taglia || 'media'}`}>
+                <span class="card-data">{c.data.data.toLocaleDateString('it-IT')} - {c.sezione}</span>
+                {c.data.titolo && <h4 class="card-titolo">{c.data.titolo}</h4>}
+                {c.data.immagine && <img src={c.data.immagine} alt="" class="card-immagine" />}
+                {c.data.estratto && <p class="card-testo">{c.data.estratto}</p>}
+            </a>
+            ))}
+        </div>
+      </section>
+    )}
+    <Footer />
+  </body>
+</html>
+
+<style>
+  :root {
+    --crema:    #FAF7F1;
+    --nero:     #1F1C18;
+    --verde:    #A4D1BA;
+    --rosso:    #E66952;
+    --giallo:   #E8CC4A;
+    --azzurro:  #7AA2BE;
+    --font-titolo: 'Space Grotesk', sans-serif;
+    --font-testo:  'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+   html {
+    background: var(--crema);
+    overflow-y: scroll;
+  }
+
+
+  body {
+    background: var(--crema);
+    color: var(--nero);
+    font-family: var(--font-testo);
+    padding: 4rem 6rem 3rem 6rem !important;
+    max-width: 1500px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Testata */
+  .testata {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+  .titolo-blocco { text-align: center; }
+  .link-titolo { text-decoration: none; color: inherit; display: block; }
+  h1 {
+    font-family: var(--font-titolo);
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .sottotitolo {
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-top: 0;
+  }
+
+
+  .navigazione {
+    font-family: var(--font-titolo);
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .navigazione a { color: var(--nero); text-decoration: none; }
+
+  /* Hover: ogni voce si colora del colore della sua sezione */
+  .navigazione a[href="/theory"]:hover     { color: var(--rosso); }
+  .navigazione a[href="/laboratory"]:hover { color: var(--verde); }
+  .navigazione a[href="/atlas"]:hover      { color: var(--azzurro); }
+  .navigazione a[href="/funzone"]:hover    { color: var(--giallo); }
+  
+  /* ===== POST ===== */
+  .post {
+    max-width: 48rem;
+    margin: 0rem auto;
+    margin-top: 3rem;
+  }
+  .post-data {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--nero);
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+  .post-titolo {
+    font-family: var(--font-titolo);
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .post-immagine {
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+  }
+  .post-corpo {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .post-corpo p { margin-bottom: 1.2rem; }
+  .post-corpo h2 {
+    font-family: var(--font-titolo);
+    font-size: 1.4rem;
+    margin: 2rem 0 1rem;
+  }
+  .post-corpo ul, .post-corpo ol {
+    margin: 1rem 0 1.2rem 2rem;
+  }
+  .post-corpo li { margin-bottom: 0.3rem; }
+
+  /* ===== CORRELATI ===== */
+  .correlati {
+    margin-top: 4rem;
+  }
+  .correlati-titolo {
+    font-family: var(--font-titolo);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+  .correlati-griglia {
+    columns: 4;
+    column-gap: 2rem;
+  }
+
+  /* Card (riusato dalla sezione) */
+  .card {
+    border-radius: 13px;
+    padding: 1rem 3rem 2rem 3rem;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    break-inside: avoid;
+    margin-bottom: 1.2rem;
+    min-height: 10rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+  .card-rosso   { background: var(--rosso); color: var(--crema); }
+  .card-verde   { background: var(--verde); }
+  .card-azzurro { background: var(--azzurro); color: var(--crema); }
+  .card-giallo  { background: var(--giallo); }
+  .card-vuota   { background: var(--crema); color: var(--nero); font-style: italic; }
+  .card-piccola { min-height: 10rem; }
+  .card-media   { min-height: 14rem; }
+  .card-grande  { min-height: 20rem; }
+  .card-data {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+  }
+  .card-titolo {
+    font-family: var(--font-titolo);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .card-testo {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+  }
+  .card-immagine {
+    display: block;
+    margin: -2rem -3rem 1rem -3rem;
+    filter: grayscale(1) contrast(1.1);
+    mix-blend-mode: multiply;
+    width: calc(100% + 6rem);
+  }
+
+  @media (max-width: 700px) {
+    .correlati-griglia { columns: 1; }
+  }
+</style>

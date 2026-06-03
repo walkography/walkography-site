@@ -1,0 +1,275 @@
+---
+import { getCollection } from 'astro:content';
+import Footer from '../components/Footer.astro';
+import Hamburger from '../components/Hamburger.astro';
+
+export async function getStaticPaths() {
+  const sezioni = ['theory', 'atlas', 'funzone', 'laboratory'];
+  return sezioni.map((s) => ({ params: { sezione: s } }));
+}
+
+const { sezione } = Astro.params;
+
+const meta: Record<string, { titolo: string; intro: string; colore: string; coloreCard: string; descrizione: string }> = {
+  theory: {
+    titolo: 'Theory',
+    intro: "Walkography began as the need...",   // tienilo invariato
+    colore: 'var(--rosso)',
+    coloreCard: 'rosso',
+    descrizione: "Riflessioni teoriche di Walkography sul camminare come metodologia di osservazione e cartografia del territorio."
+  },
+  atlas: {
+    titolo: 'Atlas',
+    intro: "L'atlante raccoglie...",
+    colore: 'var(--azzurro)',
+    coloreCard: 'azzurro',
+    descrizione: "L'atlante di Walkography: cartografie prodotte attraverso la pratica del camminare."
+  },
+  funzone: {
+    titolo: 'Funzone',
+    intro: "Note di campo...",
+    colore: 'var(--giallo)',
+    coloreCard: 'giallo',
+    descrizione: "Note di campo, divagazioni e materiali laterali del progetto Walkography."
+  },
+  laboratory: {
+    titolo: 'Laboratory',
+    intro: "Esperimenti, strumenti...",
+    colore: 'var(--verde)',
+    coloreCard: 'verde',
+    descrizione: "Esperimenti, strumenti e ipotesi metodologiche del progetto Walkography."
+  },
+};
+const info = meta[sezione!];
+const posts = await getCollection(sezione as any);
+const cards = posts.sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf());
+---
+
+<html lang="it">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{info.titolo} — Walkography</title>
+    <meta name="description" content={info.descrizione} />
+
+        <!-- ===== Open Graph ===== -->
+    <meta property="og:title" content={`${info.titolo} — Walkography`} />
+    <meta property="og:description" content={info.descrizione} />
+    <meta property="og:image" content="https://walkography.eu/og-default.jpg" />
+    <meta property="og:url" content={`https://walkography.eu/${sezione}`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Walkography" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${info.titolo} — Walkography`} />
+    <meta name="twitter:description" content={info.descrizione} />
+    <meta name="twitter:image" content="https://walkography.eu/og-default.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    
+    <Hamburger />
+    <header class="testata">
+      <div></div>
+      <div class="titolo-blocco">
+        <a href="/" class="link-titolo">
+          <h1>WALKOGRAPHY</h1>
+          <p class="sottotitolo">Hic et Nunc cartographies</p>
+        </a>
+      </div>
+
+    </header>
+
+    <nav class="navigazione">
+      <a href="/theory"     style={sezione === 'theory'     ? 'color: var(--rosso)'   : ''}>Theory</a>
+      <a href="/laboratory" style={sezione === 'laboratory' ? 'color: var(--verde)'   : ''}>Laboratory</a>
+      <a href="/atlas"      style={sezione === 'atlas'      ? 'color: var(--azzurro)' : ''}>Atlas</a>
+      <a href="/funzone"    style={sezione === 'funzone'    ? 'color: var(--giallo)'  : ''}>Funzone</a>
+    </nav>
+    <section class="intro-sezione">
+      <div class="testo-intro">
+        <p>{info.intro}</p>
+      </div>
+    </section>
+
+    <main class="griglia">
+    
+    {cards.map((c) => (
+        <a href={`/${sezione}/${c.id}`} class={`card card-${info.coloreCard} card-${c.data.taglia || 'media'}`}>
+          <span class="card-data">{c.data.data.toLocaleDateString('it-IT')}</span>
+          {c.data.titolo && <h2 class="card-titolo">{c.data.titolo}</h2>}
+          {c.data.immagine && <img src={c.data.immagine} alt="" class="card-immagine" />}
+          {c.data.estratto && <p class="card-testo">{c.data.estratto}</p>}
+        </a>
+      ))}
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  :root {
+    --crema:    #FAF7F1;
+    --nero:     #1F1C18;
+    --verde:    #A4D1BA;
+    --rosso:    #E66952;
+    --giallo:   #E8CC4A;
+    --azzurro:  #7AA2BE;
+
+    --font-titolo: 'Space Grotesk', sans-serif;
+    --font-testo:  'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+   html {
+    background: var(--crema);
+    overflow-y: scroll;
+  }
+
+
+  body {
+    background: var(--crema);
+    color: var(--nero);
+    font-family: var(--font-testo);
+    padding: 4rem 6rem 3rem 6rem !important;
+    
+    max-width: 1500px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+
+  .testata {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+  .titolo-blocco { text-align: center; }
+  .link-titolo {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  h1 {
+    font-family: var(--font-titolo);
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .sottotitolo {
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-top: 0;
+  }
+
+
+
+.navigazione {
+    font-family: var(--font-titolo);
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .navigazione a {
+    color: var(--nero);
+    text-decoration: none;
+  }
+
+  /* Hover: ogni voce si colora del colore della sua sezione */
+  .navigazione a[href="/theory"]:hover     { color: var(--rosso); }
+  .navigazione a[href="/laboratory"]:hover { color: var(--verde); }
+  .navigazione a[href="/atlas"]:hover      { color: var(--azzurro); }
+  .navigazione a[href="/funzone"]:hover    { color: var(--giallo); }
+
+  
+    
+  .intro-sezione {
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+  }
+  .testo-intro {
+    max-width: 48rem;
+    margin: 0 auto;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    text-align: left;
+    margin-bottom: 5rem;
+  }
+
+  .griglia {
+    columns: 4;
+    column-gap: 2rem;
+  }
+
+  .card {
+    border-radius: 13px;
+    padding: 1rem 3rem 2rem 3rem;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    break-inside: avoid;
+    margin-bottom: 1.2rem;
+    min-height: 10rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .card-verde   { background: var(--verde); }
+  .card-rosso   { background: var(--rosso); color: var(--crema); }
+  .card-giallo  { background: var(--giallo); }
+  .card-azzurro { background: var(--azzurro); color: var(--crema); }
+  .card-vuota   { background: var(--crema); color: var(--nero); font-style: italic; }
+
+  .card-piccola { height: 10rem; }
+  .card-media   { height: 18rem; }
+  .card-grande  { height: 30rem; }
+
+  .card-data {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+  }
+  .card-titolo {
+    font-family: var(--font-titolo);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .card-testo {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 15;
+    -webkit-box-orient: vertical;
+  }
+  .card-immagine {
+    display: block;
+    margin: .5rem -3rem 1rem -3rem;
+    filter: grayscale(1) contrast(1.1);
+    mix-blend-mode: multiply;
+    width: calc(100% + 6rem);
+    height: 20rem;
+  }
+
+  @media (max-width: 700px) {
+    .griglia { columns: 1; }
+  
+  }
+</style>

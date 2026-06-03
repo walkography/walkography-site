@@ -1,0 +1,164 @@
+---
+import { getCollection, render } from 'astro:content';
+import Footer from '../components/Footer.astro';
+import Hamburger from '../components/Hamburger.astro';
+
+const allPages = await getCollection('pages');
+const page = allPages.find(p => p.id === 'about');
+
+if (!page) {
+  throw new Error(`Pagina 'about' non trovata. ID disponibili: ${allPages.map(p => p.id).join(', ')}`);
+}
+
+const { Content } = await render(page);
+---
+
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{page!.data.titolo} — Walkography</title>
+    <meta name="description" content="About Walkography: il progetto, il metodo, il cammino come pratica cartografica." />
+
+        <!-- ===== Open Graph ===== -->
+    <meta property="og:title" content="About — Walkography" />
+    <meta property="og:description" content="About Walkography: il progetto, il metodo, il cammino come pratica cartografica." />
+    <meta property="og:image" content="https://walkography.eu/og-default.jpg" />
+    <meta property="og:url" content="https://walkography.eu/about" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Walkography" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="About — Walkography" />
+    <meta name="twitter:description" content="About Walkography: il progetto, il metodo." />
+    <meta name="twitter:image" content="https://walkography.eu/og-default.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <Hamburger />
+    <header class="testata">
+      <div></div>
+      <div class="titolo-blocco">
+        <a href="/" class="link-titolo">
+          <h1>WALKOGRAPHY</h1>
+          <p class="sottotitolo">Hic et Nunc cartographies</p>
+        </a>
+      </div>
+    </header>
+
+    <nav class="navigazione">
+      <a href="/theory">Theory</a>
+      <a href="/laboratory">Laboratory</a>
+      <a href="/atlas">Atlas</a>
+      <a href="/funzone">Funzone</a>
+    </nav>
+
+    <article class="about">
+      <h2 class="about-titolo">{page!.data.titolo}</h2>
+      <Content />
+    </article>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  :root {
+    --crema:    #FAF7F1;
+    --nero:     #1F1C18;
+    --verde:    #A4D1BA;
+    --rosso:    #E66952;
+    --giallo:   #E8CC4A;
+    --azzurro:  #7AA2BE;
+    --font-titolo: 'Space Grotesk', sans-serif;
+    --font-testo:  'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--crema); overflow-y: scroll; }
+
+  body {
+    background: var(--crema);
+    color: var(--nero);
+    font-family: var(--font-testo);
+    padding: 4rem 6rem 3rem 6rem !important;
+    max-width: 1500px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .testata {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+  .titolo-blocco { text-align: center; }
+  .link-titolo { text-decoration: none; color: inherit; display: block; }
+  h1 {
+    font-family: var(--font-titolo);
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .sottotitolo {
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-top: 0;
+  }
+
+  .navigazione {
+    font-family: var(--font-titolo);
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  
+  .navigazione a {
+    color: var(--nero);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .navigazione a[href="/theory"]:hover     { color: var(--rosso); }
+  .navigazione a[href="/laboratory"]:hover { color: var(--verde); }
+  .navigazione a[href="/atlas"]:hover      { color: var(--azzurro); }
+  .navigazione a[href="/funzone"]:hover    { color: var(--giallo); }
+
+  .about {
+    max-width: 48rem;
+    margin: 4rem auto;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .about-titolo {
+    font-family: var(--font-titolo);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+  }
+  .about :global(p) {
+    margin-bottom: 1.2rem;
+  }
+  .about :global(h2) {
+    font-family: var(--font-titolo);
+    font-size: 1.3rem;
+    margin: 2.5rem 0 0.8rem;
+  }
+  .about :global(a) {
+    color: var(--nero);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .about :global(a:hover) {
+    color: var(--rosso);
+  }
+</style>

@@ -1,0 +1,262 @@
+---
+import { getCollection } from 'astro:content';
+import Footer from '../components/Footer.astro';
+import Hamburger from '../components/Hamburger.astro';
+
+const sezioni = ["About", "Theory", "Laboratory", "Atlas", "Funzone"];
+
+// Mappa: ogni sezione ha il suo colore fisso
+const colori: Record<string, string> = {
+  Theory:     'rosso',
+  Atlas:      'azzurro',
+  Funzone:    'giallo',
+  Laboratory: 'verde',
+  News:       'vuota',
+};
+
+const theory     = await getCollection('theory');
+const atlas      = await getCollection('atlas');
+const funzone    = await getCollection('funzone');
+const laboratory = await getCollection('laboratory');
+const news       = await getCollection('news');
+
+const tutti = [
+  ...theory.map(p     => ({ ...p, sezione: 'Theory'     })),
+  ...atlas.map(p      => ({ ...p, sezione: 'Atlas'      })),
+  ...funzone.map(p    => ({ ...p, sezione: 'Funzone'    })),
+  ...laboratory.map(p => ({ ...p, sezione: 'Laboratory' })),
+  ...news.map(p       => ({ ...p, sezione: 'News'       })),
+];
+
+const cards = tutti.sort((a, b) =>
+  b.data.data.valueOf() - a.data.data.valueOf()
+);
+---
+
+<html lang="it">
+
+ <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Walkography — Hic et Nunc cartographies</title>
+  <meta name="description" content="Walkography è un progetto di ricerca sul camminare come pratica cartografica e di osservazione del territorio. Theory, Laboratory, Atlas, Funzone." />
+
+    <!-- ===== Open Graph (anteprime social) ===== -->
+  <meta property="og:title" content="Walkography — Hic et Nunc cartographies" />
+  <meta property="og:description" content="Walkography è un progetto di ricerca sul camminare come pratica cartografica e di osservazione del territorio." />
+  <meta property="og:image" content="https://walkography.eu/og-default.jpg" />
+  <meta property="og:url" content="https://walkography.eu/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Walkography" />
+
+  <!-- Twitter Card (per anteprime Twitter più grandi) -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Walkography — Hic et Nunc cartographies" />
+  <meta name="twitter:description" content="Progetto di ricerca sul camminare come pratica cartografica." />
+  <meta name="twitter:image" content="https://walkography.eu/og-default.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+ </head>
+
+  <body>
+    <Hamburger />
+    <header class="testata">
+      <div></div>
+      <div class="titolo-blocco">
+        <h1>WALKOGRAPHY</h1>
+        <p class="sottotitolo">Hic et Nunc cartographies</p>
+      </div>
+    </header>
+
+    <nav class="navigazione">
+      <a href="/theory">Theory</a>
+      <a href="/laboratory">Laboratory</a>
+      <a href="/atlas">Atlas</a>
+      <a href="/funzone">Funzone</a>
+    </nav>
+
+    <main class="griglia">
+      <a href="/about" class="card card-about">About</a>
+
+      {cards.map((c) => {
+        const ha_pagina = c.sezione !== 'News';
+        const link = ha_pagina ? `/${c.sezione.toLowerCase()}/${c.id}` : null;
+        return ha_pagina ? (
+          <a href={link} class={`card card-${colori[c.sezione]} card-${c.data.taglia || 'media'}`}>
+            <span class="card-data">{c.data.data.toLocaleDateString('it-IT')} - {c.sezione}</span>
+            {c.data.titolo && <h2 class="card-titolo">{c.data.titolo}</h2>}
+            {c.data.immagine && <img src={c.data.immagine} alt="" class="card-immagine" />}
+            {c.data.estratto && <p class="card-testo">{c.data.estratto}</p>}
+          </a>
+        ) : (
+          <article class={`card card-${colori[c.sezione]} card-${c.data.taglia || 'media'}`}>
+            <span class="card-data">{c.data.data.toLocaleDateString('it-IT')} - {c.sezione}</span>
+            {c.data.titolo && <h2 class="card-titolo">{c.data.titolo}</h2>}
+            {c.data.immagine && <img src={c.data.immagine} alt="" class="card-immagine" />}
+            {c.data.estratto && <p class="card-testo">{c.data.estratto}</p>}
+          </article>
+        );
+      })}
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  :root {
+    --crema:    #FAF7F1;
+    --nero:     #1F1C18;
+    --verde:    #A4D1BA;
+    --rosso:    #E66952;
+    --giallo:   #E8CC4A;
+    --azzurro:  #7AA2BE;
+
+    --font-titolo: 'Space Grotesk', sans-serif;
+    --font-testo:  'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html {
+    background: var(--crema);
+    overflow-y: scroll;
+  }
+
+  body {
+    background: var(--crema);
+    color: var(--nero);
+    font-family: var(--font-testo);
+    padding: 4rem 6rem 3rem 6rem !important;
+    
+    max-width: 1500px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .testata {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+  .titolo-blocco { text-align: center; }
+  h1 {
+    font-family: var(--font-titolo);
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .sottotitolo {
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-top: 0;
+  }
+
+  .navigazione {
+    font-family: var(--font-titolo);
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .navigazione a {
+    color: var(--nero);
+    text-decoration: none;
+  }
+
+  /* Hover: ogni voce si colora del colore della sua sezione */
+  .navigazione a[href="/theory"]:hover     { color: var(--rosso); }
+  .navigazione a[href="/laboratory"]:hover { color: var(--verde); }
+  .navigazione a[href="/atlas"]:hover      { color: var(--azzurro); }
+  .navigazione a[href="/funzone"]:hover    { color: var(--giallo); }
+
+
+  .griglia {
+    columns: 4;
+    column-gap: 2rem;
+  }
+
+  .card {
+    border-radius: 13px;
+    padding: 1rem 3rem 2rem 3rem;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    break-inside: avoid;
+    margin-bottom: 1.2rem;
+    min-height: 10rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .card-verde   { background: var(--verde); }
+  .card-rosso   { background: var(--rosso); color: var(--crema); }
+  .card-giallo  { background: var(--giallo); }
+  .card-azzurro { background: var(--azzurro); color: var(--crema); }
+  .card-vuota   { background: var(--crema); color: var(--nero); font-style: italic; }
+
+  .card-about {
+    background: var(--nero);
+    color: var(--crema);
+    font-family: var(--font-titolo);
+    font-size: 2.5rem;
+    font-weight: 800;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-piccola { height: 10rem; }
+  .card-media   { height: 18rem; }
+  .card-grande  { height: 30rem; }
+
+  .card-data {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+  }
+  .card-titolo {
+    font-family: var(--font-titolo);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .card-giallo .card-titolo {
+    font-family: var(--font-titolo);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: auto;
+    color: var(--crema);
+    text-align: center;
+  }
+  .card-testo {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 15;
+    -webkit-box-orient: vertical;
+  }
+
+  .card-immagine {
+    display: block;
+    margin: .5rem -3rem 1rem -3rem;
+    filter: grayscale(1) contrast(1.1);
+    mix-blend-mode: multiply;
+    width: calc(100% + 6rem);
+    height: 20rem;
+  }
+
+  @media (max-width: 700px) {
+    .griglia { columns: 1; }
+  }
+</style>

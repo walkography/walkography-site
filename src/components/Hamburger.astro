@@ -1,0 +1,157 @@
+---
+// Hamburger riutilizzabile — pannello laterale a scivolo da destra.
+// Funziona in ogni pagina. Modifica voci/link qui in un solo posto.
+---
+
+<!-- Pulsante hamburger (le tre linee in alto a destra) -->
+<button class="hamburger-toggle" aria-label="Apri menu" id="hamburger-open">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<!-- Sfondo scuro che appare dietro il pannello -->
+<div class="hamburger-backdrop" id="hamburger-backdrop"></div>
+
+<!-- Il pannello vero e proprio -->
+<aside class="hamburger-pannello" id="hamburger-pannello" aria-label="Menu di navigazione">
+  <button class="hamburger-close" aria-label="Chiudi menu" id="hamburger-close">×</button>
+
+  <nav class="hamburger-nav">
+    <a href="/theory"     class="hamburger-link" style="color: var(--rosso)">Theory</a>
+    <a href="/laboratory" class="hamburger-link" style="color: var(--verde)">Laboratory</a>
+    <a href="/atlas"      class="hamburger-link" style="color: var(--azzurro)">Atlas</a>
+    <a href="/funzone"    class="hamburger-link" style="color: var(--giallo)">Funzone</a>
+    <a href="/about"      class="hamburger-link">About</a>
+    <a href="mailto:hi@walkography.eu" class="hamburger-link">Contact</a>
+    <a href="https://www.instagram.com/walkography.eu/" target="_blank" rel="noopener" class="hamburger-link">Instagram</a>
+  </nav>
+</aside>
+
+<style>
+  /* Pulsante hamburger (le tre linee fisse in alto a destra della pagina) */
+  .hamburger-toggle {
+    position: fixed;
+    top: 4rem;
+    right: 6rem;
+    z-index: 100;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 3rem;
+    height: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .hamburger-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--nero);
+    border-radius: 1px;
+    transition: background 0.2s ease;
+  }
+  .hamburger-toggle:hover span { background: var(--rosso); }
+
+  /* Sfondo scuro che oscura la pagina quando il pannello è aperto */
+  .hamburger-backdrop {
+    position: fixed;
+    inset: 0;                 /* riempie tutto lo schermo */
+    background: rgba(31, 28, 24, 0.4);
+    opacity: 0;
+    pointer-events: none;     /* di default non blocca i click */
+    transition: opacity 0.3s ease;
+    z-index: 200;
+  }
+  .hamburger-backdrop.aperto {
+    opacity: 1;
+    pointer-events: auto;     /* quando aperto, sì cliccabile (per chiudere) */
+  }
+
+  /* Il pannello laterale */
+  .hamburger-pannello {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(28rem, 100vw);  /* 28rem o larghezza schermo se più piccolo */
+    height: 100vh;
+    background: var(--crema);
+    z-index: 300;
+    padding: 4rem 3rem;
+    transform: translateX(100%);   /* nascosto fuori a destra */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -20px 0 40px rgba(0, 0, 0, 0.08);
+    overflow-y: auto;
+  }
+  .hamburger-pannello.aperto {
+    transform: translateX(0);       /* dentro, visibile */
+  }
+
+  /* Pulsante × di chiusura in alto a destra del pannello */
+  .hamburger-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-titolo);
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--nero);
+    padding: 0;
+  }
+  .hamburger-close:hover { color: var(--rosso); }
+
+  /* Lista delle voci */
+  .hamburger-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 3rem;
+  }
+  .hamburger-link {
+    font-family: var(--font-titolo);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--nero);
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .hamburger-link:hover {
+    opacity: 0.7;
+    transform: translateX(0.5rem);
+  }
+</style>
+
+<script>
+  // Apertura/chiusura del pannello
+  const apri      = document.getElementById('hamburger-open');
+  const chiudi    = document.getElementById('hamburger-close');
+  const backdrop  = document.getElementById('hamburger-backdrop');
+  const pannello  = document.getElementById('hamburger-pannello');
+
+  function apriMenu() {
+    pannello.classList.add('aperto');
+    backdrop.classList.add('aperto');
+    document.body.style.overflow = 'hidden';   // blocca lo scroll della pagina dietro
+  }
+  function chiudiMenu() {
+    pannello.classList.remove('aperto');
+    backdrop.classList.remove('aperto');
+    document.body.style.overflow = '';
+  }
+
+  apri.addEventListener('click', apriMenu);
+  chiudi.addEventListener('click', chiudiMenu);
+  backdrop.addEventListener('click', chiudiMenu);
+
+  // Tasto Escape per chiudere
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') chiudiMenu();
+  });
+</script>
