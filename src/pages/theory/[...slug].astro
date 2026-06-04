@@ -44,6 +44,20 @@ const colori: Record<string, string> = {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    <!-- ===== Open Graph ===== -->
+    <meta property="og:title" content={`${post.data.titolo} — Walkography`} />
+    <meta property="og:description" content={post.data.descrizione || post.data.estratto || "Articolo di Walkography."} />
+    <meta property="og:image" content={post.data.immagine ? `https://walkography.eu${post.data.immagine}` : "https://walkography.eu/og-default.jpg"} />
+    <meta property="og:url" content={`https://walkography.eu/theory/${post.id}`} />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Walkography" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${post.data.titolo} — Walkography`} />
+    <meta name="twitter:description" content={post.data.descrizione || post.data.estratto || ""} />
+    <meta name="twitter:image" content={post.data.immagine ? `https://walkography.eu${post.data.immagine}` : "https://walkography.eu/og-default.jpg"} />
+
   </head>
 
   <body>
@@ -90,6 +104,18 @@ const colori: Record<string, string> = {
       </section>
     )}
     <Footer />
+    <script>
+  // Reindirizza al pannello quando ricevi un invito via email
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
   </body>
 </html>
 

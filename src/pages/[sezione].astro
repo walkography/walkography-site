@@ -52,6 +52,7 @@ const cards = posts.sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf()
     <meta name="viewport" content="width=device-width" />
     <title>{info.titolo} — Walkography</title>
     <meta name="description" content={info.descrizione} />
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
         <!-- ===== Open Graph ===== -->
     <meta property="og:title" content={`${info.titolo} — Walkography`} />
@@ -110,6 +111,18 @@ const cards = posts.sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf()
     </main>
     <Footer />
   </body>
+  <script>
+  // Reindirizza al pannello quando ricevi un invito via email
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
 </html>
 
 <style>

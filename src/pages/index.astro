@@ -40,6 +40,7 @@ const cards = tutti.sort((a, b) =>
   <meta name="viewport" content="width=device-width" />
   <title>Walkography — Hic et Nunc cartographies</title>
   <meta name="description" content="Walkography è un progetto di ricerca sul camminare come pratica cartografica e di osservazione del territorio. Theory, Laboratory, Atlas, Funzone." />
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <!-- ===== Open Graph (anteprime social) ===== -->
   <meta property="og:title" content="Walkography — Hic et Nunc cartographies" />
@@ -101,6 +102,19 @@ const cards = tutti.sort((a, b) =>
       })}
     </main>
     <Footer />
+    <script>
+  // Reindirizza al pannello quando ricevi un invito via email
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+
   </body>
 </html>
 

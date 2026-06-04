@@ -19,6 +19,7 @@ const { Content } = await render(page);
     <meta name="viewport" content="width=device-width" />
     <title>{page!.data.titolo} — Walkography</title>
     <meta name="description" content="About Walkography: il progetto, il metodo, il cammino come pratica cartografica." />
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
         <!-- ===== Open Graph ===== -->
     <meta property="og:title" content="About — Walkography" />
@@ -63,6 +64,18 @@ const { Content } = await render(page);
     </article>
 
     <Footer />
+    <script>
+  // Reindirizza al pannello quando ricevi un invito via email
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
   </body>
 </html>
 

@@ -41,6 +41,7 @@ const colori: Record<string, string> = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{post.data.titolo} — Walkography</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
         <!-- ===== Open Graph ===== -->
     <meta property="og:title" content={`${post.data.titolo} — Walkography`} />
@@ -106,6 +107,18 @@ const colori: Record<string, string> = {
       </section>
     )}
     <Footer />
+    <script>
+  // Reindirizza al pannello quando ricevi un invito via email
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
   </body>
 </html>
 

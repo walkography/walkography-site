@@ -1,0 +1,134 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+locale: 'it'
+
+collections:
+  - name: "theory"
+    label: "Theory"
+    label_singular: "Articolo Theory"
+    folder: "src/content/theory"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Titolo", name: "titolo", widget: "string" }
+      - { label: "Data", name: "data", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, picker_utc: true }
+      - { label: "Taglia card", name: "taglia", widget: "select", options: ["piccola", "media", "grande"], default: "media" }
+      - { label: "Immagine", name: "immagine", widget: "image", required: false, media_library: { config: { multiple: false } } }
+      - { label: "Estratto (per le card)", name: "estratto", widget: "text", required: false }
+      - { label: "Descrizione SEO (opzionale)", name: "descrizione", widget: "text", required: false }
+      - label: "Articoli correlati"
+        name: "correlati"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Sezione", name: "sezione", widget: "select", options: ["theory", "atlas", "funzone", "laboratory", "news"] }
+          - { label: "Slug del post", name: "slug", widget: "string" }
+      - { label: "Contenuto", name: "body", widget: "markdown" }
+
+  - name: "atlas"
+    label: "Atlas"
+    label_singular: "Voce Atlas"
+    folder: "src/content/atlas"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Titolo", name: "titolo", widget: "string" }
+      - { label: "Data", name: "data", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, picker_utc: true }
+      - { label: "Taglia card", name: "taglia", widget: "select", options: ["piccola", "media", "grande"], default: "media" }
+      - { label: "Immagine", name: "immagine", widget: "image", required: false }
+      - { label: "Estratto", name: "estratto", widget: "text", required: false }
+      - { label: "Descrizione SEO", name: "descrizione", widget: "text", required: false }
+      - label: "Articoli correlati"
+        name: "correlati"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Sezione", name: "sezione", widget: "select", options: ["theory", "atlas", "funzone", "laboratory", "news"] }
+          - { label: "Slug del post", name: "slug", widget: "string" }
+      - { label: "Contenuto", name: "body", widget: "markdown" }
+
+  - name: "funzone"
+    label: "Funzone"
+    label_singular: "Voce Funzone"
+    folder: "src/content/funzone"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Titolo", name: "titolo", widget: "string" }
+      - { label: "Data", name: "data", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, picker_utc: true }
+      - { label: "Taglia card", name: "taglia", widget: "select", options: ["piccola", "media", "grande"], default: "media" }
+      - { label: "Immagine", name: "immagine", widget: "image", required: false }
+      - { label: "Estratto", name: "estratto", widget: "text", required: false }
+      - { label: "Descrizione SEO", name: "descrizione", widget: "text", required: false }
+      - label: "Articoli correlati"
+        name: "correlati"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Sezione", name: "sezione", widget: "select", options: ["theory", "atlas", "funzone", "laboratory", "news"] }
+          - { label: "Slug del post", name: "slug", widget: "string" }
+      - { label: "Contenuto", name: "body", widget: "markdown" }
+
+  - name: "laboratory"
+    label: "Laboratory"
+    label_singular: "Voce Laboratory"
+    folder: "src/content/laboratory"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Titolo", name: "titolo", widget: "string" }
+      - { label: "Data", name: "data", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, picker_utc: true }
+      - { label: "Taglia card", name: "taglia", widget: "select", options: ["piccola", "media", "grande"], default: "media" }
+      - { label: "Immagine", name: "immagine", widget: "image", required: false }
+      - { label: "Estratto", name: "estratto", widget: "text", required: false }
+      - { label: "Descrizione SEO", name: "descrizione", widget: "text", required: false }
+      - label: "Articoli correlati"
+        name: "correlati"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Sezione", name: "sezione", widget: "select", options: ["theory", "atlas", "funzone", "laboratory", "news"] }
+          - { label: "Slug del post", name: "slug", widget: "string" }
+      - { label: "Contenuto", name: "body", widget: "markdown" }
+
+  - name: "news"
+    label: "News"
+    label_singular: "Nota News"
+    folder: "src/content/news"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Titolo", name: "titolo", widget: "string" }
+      - { label: "Data", name: "data", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, picker_utc: true }
+      - { label: "Taglia card", name: "taglia", widget: "select", options: ["piccola", "media"], default: "piccola" }
+      - { label: "Estratto", name: "estratto", widget: "text", required: false }
+      - { label: "Descrizione SEO", name: "descrizione", widget: "text", required: false }
+      - { label: "Contenuto", name: "body", widget: "markdown" }
+
+  - name: "pages"
+    label: "Pagine"
+    label_singular: "Pagina"
+    folder: "src/content/pages"
+    create: false
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Titolo", name: "titolo", widget: "string" }
+      - { label: "Descrizione SEO", name: "descrizione", widget: "text", required: false }
+      - { label: "Contenuto", name: "body", widget: "markdown" }
