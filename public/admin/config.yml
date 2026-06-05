@@ -11,6 +11,7 @@ collections:
   - name: "theory"
     label: "Theory"
     label_singular: "Articolo Theory"
+    identifier_field: "titolo"
     folder: "src/content/theory"
     create: true
     slug: "{{slug}}"
@@ -35,6 +36,7 @@ collections:
   - name: "atlas"
     label: "Atlas"
     label_singular: "Voce Atlas"
+    identifier_field: "titolo"
     folder: "src/content/atlas"
     create: true
     slug: "{{slug}}"
@@ -59,6 +61,7 @@ collections:
   - name: "funzone"
     label: "Funzone"
     label_singular: "Voce Funzone"
+    identifier_field: "titolo"
     folder: "src/content/funzone"
     create: true
     slug: "{{slug}}"
@@ -83,6 +86,7 @@ collections:
   - name: "laboratory"
     label: "Laboratory"
     label_singular: "Voce Laboratory"
+    identifier_field: "titolo"
     folder: "src/content/laboratory"
     create: true
     slug: "{{slug}}"
@@ -107,6 +111,7 @@ collections:
   - name: "news"
     label: "News"
     label_singular: "Nota News"
+    identifier_field: "titolo"
     folder: "src/content/news"
     create: true
     slug: "{{slug}}"
@@ -123,6 +128,7 @@ collections:
   - name: "pages"
     label: "Pagine"
     label_singular: "Pagina"
+    identifier_field: "titolo"
     folder: "src/content/pages"
     create: false
     slug: "{{slug}}"
