@@ -1,9 +1,9 @@
 ---
-titolo: "Camminare è cartografare"
+titolo: Camminare è cartografare
 data: 2026-05-26
-taglia: grande
+taglia: media
 immagine: /01_ponty.jpg
-estratto: "Walkography began as the need..."
+estratto: Walkography began as the need...
 correlati:
   - sezione: theory
     slug: lettura-territorio
