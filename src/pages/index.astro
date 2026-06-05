@@ -33,7 +33,7 @@ const cards = tutti.sort((a, b) =>
 );
 ---
 
-<html lang="it">
+<html lang="en">
 
  <head>
   <meta charset="utf-8" />
@@ -76,11 +76,11 @@ const cards = tutti.sort((a, b) =>
       <a href="/laboratory">Laboratory</a>
       <a href="/atlas">Atlas</a>
       <a href="/funzone">Funzone</a>
+      <a href="/about">About</a>
     </nav>
 
     <main class="griglia">
-      <a href="/about" class="card card-about">About</a>
-
+      
       {cards.map((c) => {
         const ha_pagina = c.sezione !== 'News';
         const link = ha_pagina ? `/${c.sezione.toLowerCase()}/${c.id}` : null;

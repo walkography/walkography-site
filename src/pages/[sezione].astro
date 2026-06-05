@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import Footer from '../components/Footer.astro';
 import Hamburger from '../components/Hamburger.astro';
 
@@ -10,53 +10,36 @@ export async function getStaticPaths() {
 
 const { sezione } = Astro.params;
 
-const meta: Record<string, { titolo: string; intro: string; colore: string; coloreCard: string; descrizione: string }> = {
-  theory: {
-    titolo: 'Theory',
-    intro: "Walkography began as the need...",   // tienilo invariato
-    colore: 'var(--rosso)',
-    coloreCard: 'rosso',
-    descrizione: "Riflessioni teoriche di Walkography sul camminare come metodologia di osservazione e cartografia del territorio."
-  },
-  atlas: {
-    titolo: 'Atlas',
-    intro: "L'atlante raccoglie...",
-    colore: 'var(--azzurro)',
-    coloreCard: 'azzurro',
-    descrizione: "L'atlante di Walkography: cartografie prodotte attraverso la pratica del camminare."
-  },
-  funzone: {
-    titolo: 'Funzone',
-    intro: "Note di campo...",
-    colore: 'var(--giallo)',
-    coloreCard: 'giallo',
-    descrizione: "Note di campo, divagazioni e materiali laterali del progetto Walkography."
-  },
-  laboratory: {
-    titolo: 'Laboratory',
-    intro: "Esperimenti, strumenti...",
-    colore: 'var(--verde)',
-    coloreCard: 'verde',
-    descrizione: "Esperimenti, strumenti e ipotesi metodologiche del progetto Walkography."
-  },
+// Struttura fissa (titolo + colori): NON editabile dal pannello
+const meta: Record<string, { titolo: string; colore: string; coloreCard: string }> = {
+  theory:     { titolo: 'Theory',     colore: 'var(--rosso)',   coloreCard: 'rosso' },
+  atlas:      { titolo: 'Atlas',      colore: 'var(--azzurro)', coloreCard: 'azzurro' },
+  funzone:    { titolo: 'Funzone',    colore: 'var(--giallo)',  coloreCard: 'giallo' },
+  laboratory: { titolo: 'Laboratory', colore: 'var(--verde)',   coloreCard: 'verde' },
 };
 const info = meta[sezione!];
+
+// Contenuto editabile dal pannello: intro (corpo) + descrizione (SEO)
+const sezioneEntry = await getEntry('sezioni', sezione!);
+const descrizione = sezioneEntry?.data.descrizione ?? '';
+const Content = sezioneEntry ? (await render(sezioneEntry)).Content : null;
+
 const posts = await getCollection(sezione as any);
 const cards = posts.sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf());
 ---
 
-<html lang="it">
+<html lang="en">
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{info.titolo} — Walkography</title>
-    <meta name="description" content={info.descrizione} />
+    <meta name="description" content={descrizione} />
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
         <!-- ===== Open Graph ===== -->
     <meta property="og:title" content={`${info.titolo} — Walkography`} />
-    <meta property="og:description" content={info.descrizione} />
+    <meta property="og:description" content={descrizione} />
     <meta property="og:image" content="https://walkography.eu/og-default.jpg" />
     <meta property="og:url" content={`https://walkography.eu/${sezione}`} />
     <meta property="og:type" content="website" />
@@ -64,7 +47,7 @@ const cards = posts.sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf()
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={`${info.titolo} — Walkography`} />
-    <meta name="twitter:description" content={info.descrizione} />
+    <meta name="twitter:description" content={descrizione} />
     <meta name="twitter:image" content="https://walkography.eu/og-default.jpg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -91,10 +74,11 @@ const cards = posts.sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf()
       <a href="/laboratory" style={sezione === 'laboratory' ? 'color: var(--verde)'   : ''}>Laboratory</a>
       <a href="/atlas"      style={sezione === 'atlas'      ? 'color: var(--azzurro)' : ''}>Atlas</a>
       <a href="/funzone"    style={sezione === 'funzone'    ? 'color: var(--giallo)'  : ''}>Funzone</a>
+      <a href="/about">About</a>
     </nav>
     <section class="intro-sezione">
       <div class="testo-intro">
-        <p>{info.intro}</p>
+        {Content && <Content />}
       </div>
     </section>
 
@@ -218,6 +202,8 @@ const cards = posts.sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf()
     text-align: left;
     margin-bottom: 5rem;
   }
+
+  .testo-intro p { margin-bottom: 1rem; }
 
   .griglia {
     columns: 4;

@@ -21,6 +21,11 @@ const pageSchema = z.object({
   descrizione: z.string().optional(),
 });
 
+// Schema per le intro delle sezioni
+const sezioneSchema = z.object({
+  descrizione: z.string().optional(),
+});
+
 // Schema per le news
 const newsSchema = z.object({
   titolo: z.string(),
@@ -37,4 +42,5 @@ export const collections = {
   laboratory: defineCollection({ loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/laboratory' }), schema: baseSchema }),
   news:       defineCollection({ loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/news' }),       schema: newsSchema }),
   pages:      defineCollection({ loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/pages' }),      schema: pageSchema }),
+  sezioni: defineCollection({ loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/sezioni' }), schema: sezioneSchema }),
 };

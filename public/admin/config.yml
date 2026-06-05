@@ -132,3 +132,31 @@ collections:
       - { label: "Titolo", name: "titolo", widget: "string" }
       - { label: "Descrizione SEO", name: "descrizione", widget: "text", required: false }
       - { label: "Contenuto", name: "body", widget: "markdown" }
+
+  - name: "sezioni"
+    label: "Intro sezioni"
+    files:
+      - name: "theory"
+        label: "Theory"
+        file: "src/content/sezioni/theory.md"
+        fields:
+          - { label: "Descrizione SEO", name: "descrizione", widget: "text", required: false }
+          - { label: "Testo introduttivo", name: "body", widget: "markdown" }
+      - name: "atlas"
+        label: "Atlas"
+        file: "src/content/sezioni/atlas.md"
+        fields:
+          - { label: "Descrizione SEO", name: "descrizione", widget: "text", required: false }
+          - { label: "Testo introduttivo", name: "body", widget: "markdown" }
+      - name: "funzone"
+        label: "Funzone"
+        file: "src/content/sezioni/funzone.md"
+        fields:
+          - { label: "Descrizione SEO", name: "descrizione", widget: "text", required: false }
+          - { label: "Testo introduttivo", name: "body", widget: "markdown" }
+      - name: "laboratory"
+        label: "Laboratory"
+        file: "src/content/sezioni/laboratory.md"
+        fields:
+          - { label: "Descrizione SEO", name: "descrizione", widget: "text", required: false }
+          - { label: "Testo introduttivo", name: "body", widget: "markdown" }
