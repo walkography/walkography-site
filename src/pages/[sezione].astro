@@ -71,12 +71,13 @@ const cards = posts.sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf()
     </header>
 
     <nav class="navigazione">
-      <a href="/theory"     style={sezione === 'theory'     ? 'color: var(--rosso)'   : ''}>Theory</a>
-      <a href="/laboratory" style={sezione === 'laboratory' ? 'color: var(--verde)'   : ''}>Laboratory</a>
-      <a href="/atlas"      style={sezione === 'atlas'      ? 'color: var(--azzurro)' : ''}>Atlas</a>
-      <a href="/funzone"    style={sezione === 'funzone'    ? 'color: var(--giallo)'  : ''}>Funzone</a>
+      <a href="/theory"     class:list={{ attivo: sezione === 'theory' }}     style={sezione === 'theory'     ? 'color: var(--rosso)'   : ''}>Theory</a>
+      <a href="/laboratory" class:list={{ attivo: sezione === 'laboratory' }} style={sezione === 'laboratory' ? 'color: var(--verde)'   : ''}>Laboratory</a>
+      <a href="/atlas"      class:list={{ attivo: sezione === 'atlas' }}      style={sezione === 'atlas'      ? 'color: var(--azzurro)' : ''}>Atlas</a>
+      <a href="/funzone"    class:list={{ attivo: sezione === 'funzone' }}    style={sezione === 'funzone'    ? 'color: var(--giallo)'  : ''}>Funzone</a>
       <a href="/about">About</a>
     </nav>
+    
     <section class="intro-sezione">
       <div class="testo-intro">
         {Content && <Content />}

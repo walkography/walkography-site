@@ -59,6 +59,7 @@ h1 {
 .navigazione {
   font-family: var(--font-titolo);
   display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
   margin-bottom: 3rem;
   font-weight: 700;
@@ -254,41 +255,34 @@ h1 {
 /* ============================================================
    MOBILE  (schermi fino a 700px)
    ============================================================ */
-@media (max-width: 700px) {
+   @media (max-width: 700px) {
 
-  body {
-    padding: 2rem 1.25rem 2.5rem 1.25rem;
+    body {
+      padding: 2rem 1.25rem 2.5rem 1.25rem;
+    }
+  
+    /* Spazio in alto così il titolo non finisce sotto l'hamburger */
+    .testata {
+      margin-top: 2.5rem;
+    }
+  
+    /* Nella barra resta solo la sezione corrente; il resto è nell'hamburger */
+    .navigazione { margin-bottom: 1.5rem; }
+    .navigazione a { display: none; }
+    .navigazione a.attivo { display: inline; }
+  
+    .griglia,
+    .correlati-griglia { columns: 1; }
+  
+    .card { padding: 1rem 1.25rem 1.5rem 1.25rem; }
+    .card-piccola,
+    .card-media,
+    .card-grande { height: auto; min-height: 8rem; }
+    .card-immagine {
+      margin: 0.5rem -1.25rem 1rem -1.25rem;
+      width: calc(100% + 2.5rem);
+      height: auto;
+    }
+    .card-about { font-size: 2rem; }
+    .card-giallo .card-titolo { font-size: 2rem; }
   }
-
-  /* Il menu va a capo invece di sforare a destra */
-  .navigazione {
-    flex-wrap: wrap;
-    gap: 0.6rem 1.1rem;
-    font-size: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  /* Una sola colonna */
-  .griglia,
-  .correlati-griglia {
-    columns: 1;
-  }
-
-  /* Card a tutta larghezza, meno spazio interno, altezza automatica */
-  .card {
-    padding: 1rem 1.25rem 1.5rem 1.25rem;
-  }
-  .card-piccola,
-  .card-media,
-  .card-grande {
-    height: auto;
-    min-height: 8rem;
-  }
-  .card-immagine {
-    margin: 0.5rem -1.25rem 1rem -1.25rem;
-    width: calc(100% + 2.5rem);
-    height: auto;
-  }
-  .card-about       { font-size: 2rem; }
-  .card-giallo .card-titolo { font-size: 2rem; }
-}
