@@ -1,0 +1,65 @@
+---
+// src/components/NetlifyImage.astro
+//
+// Componente immagine che instrada tutto attraverso il Netlify Image CDN.
+// Genera automaticamente srcset 1x/2x (retina), formato WebP e qualita 75.
+//
+// Uso tipico:
+//   <NetlifyImage src="/uploads/foto.jpg" alt="..." width={262} height={262} />   // card quadrata (ritaglio)
+//   <NetlifyImage src="/uploads/hero.jpg" alt="..." width={1000} loading="eager" fetchpriority="high" />  // hero del post
+
+import {
+  netlifyImage,
+  netlifySrcset,
+  type ImageFit,
+  type ImageFormat,
+} from "../lib/netlifyImage";
+
+interface Props {
+  src: string; // percorso dal CMS, es. "/uploads/foto.jpg"
+  alt: string;
+  width: number; // larghezza di visualizzazione in px (CSS)
+  height?: number; // altezza in px: passala per i ritagli fissi (card quadrate)
+  fit?: ImageFit; // "cover" per ritagliare; se ometti height resta proporzionale
+  sizes?: string; // attributo sizes; default "{width}px"
+  densities?: number[]; // moltiplicatori per il srcset; default [1, 2]
+  loading?: "lazy" | "eager";
+  fetchpriority?: "high" | "auto";
+  format?: ImageFormat;
+  quality?: number;
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  fit = height ? "cover" : undefined,
+  sizes,
+  densities = [1, 2],
+  loading = "lazy",
+  fetchpriority = "auto",
+  format = "webp",
+  quality = 75,
+  class: className,
+} = Astro.props;
+
+const baseOpts = { width, height, fit, format, quality };
+const widths = densities.map((d) => Math.round(width * d));
+const srcset = netlifySrcset(src, widths, baseOpts);
+const fallback = netlifyImage(src, baseOpts);
+---
+
+<img
+  src={fallback}
+  srcset={srcset}
+  sizes={sizes ?? `${width}px`}
+  alt={alt}
+  width={width}
+  height={height}
+  loading={loading}
+  fetchpriority={fetchpriority}
+  decoding="async"
+  class={className}
+/>

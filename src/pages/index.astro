@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Footer from '../components/Footer.astro';
 import Hamburger from '../components/Hamburger.astro';
 import '../styles/global.css';
+import NetlifyImage from "../components/NetlifyImage.astro";
 
 const sezioni = ["About", "Theory", "Laboratory", "Atlas", "Funzone"];
 
@@ -89,14 +90,14 @@ const cards = tutti.sort((a, b) =>
           <a href={link} class={`card card-${colori[c.sezione]} card-${c.data.taglia || 'media'}`}>
             <span class="card-data">{c.data.data.toLocaleDateString('it-IT')} - {c.sezione}</span>
             {c.data.titolo && <h2 class="card-titolo">{c.data.titolo}</h2>}
-            {c.data.immagine && <img src={c.data.immagine} alt="" class="card-immagine" />}
+            {c.data.immagine && <NetlifyImage src={c.data.immagine} alt={c.data.titolo ?? ""} width={262} height={262} class="card-immagine" sizes="(max-width: 600px) 50vw, 262px" />}
             {c.data.estratto && <p class="card-testo">{c.data.estratto}</p>}
           </a>
         ) : (
           <article class={`card card-${colori[c.sezione]} card-${c.data.taglia || 'media'}`}>
             <span class="card-data">{c.data.data.toLocaleDateString('it-IT')} - {c.sezione}</span>
             {c.data.titolo && <h2 class="card-titolo">{c.data.titolo}</h2>}
-            {c.data.immagine && <img src={c.data.immagine} alt="" class="card-immagine" />}
+            {c.data.immagine && <NetlifyImage src={c.data.immagine} alt={c.data.titolo ?? ""} width={262} height={262} class="card-immagine" sizes="(max-width: 600px) 50vw, 262px" />}
             {c.data.estratto && <p class="card-testo">{c.data.estratto}</p>}
           </article>
         );

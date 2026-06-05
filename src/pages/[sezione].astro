@@ -3,6 +3,7 @@ import { getCollection, getEntry, render } from 'astro:content';
 import Footer from '../components/Footer.astro';
 import Hamburger from '../components/Hamburger.astro';
 import '../styles/global.css';
+import NetlifyImage from "../components/NetlifyImage.astro";
 
 export async function getStaticPaths() {
   const sezioni = ['theory', 'atlas', 'funzone', 'laboratory'];
@@ -90,7 +91,7 @@ const cards = posts.sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf()
         <a href={`/${sezione}/${c.id}`} class={`card card-${info.coloreCard} card-${c.data.taglia || 'media'}`}>
           <span class="card-data">{c.data.data.toLocaleDateString('it-IT')}</span>
           {c.data.titolo && <h2 class="card-titolo">{c.data.titolo}</h2>}
-          {c.data.immagine && <img src={c.data.immagine} alt="" class="card-immagine" />}
+          {c.data.immagine && <NetlifyImage src={c.data.immagine} alt={c.data.titolo ?? ""} width={262} height={262} class="card-immagine" sizes="(max-width: 600px) 50vw, 262px" />}
           {c.data.estratto && <p class="card-testo">{c.data.estratto}</p>}
         </a>
       ))}
