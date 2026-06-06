@@ -1,8 +1,7 @@
 ---
-titolo: Just another test drift
+titolo: Coming soon....
 data: 2026-06-01
 taglia: media
-estratto: Today I completed a new drift test. There were some problems with the
-  pulse sensor.
+estratto: COMING SOON....We are uploading the website.
 ---
-Today I completed a new drift test. There were some problems with the pulse sensor.
+COMING SOON....We are uploading the website.
