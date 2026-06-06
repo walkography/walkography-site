@@ -10,9 +10,15 @@ The Walkography device is a geolocated instrument that records physiological and
 
 
 It has been designed around a few specific commitments:
-•	affordable
-•	open source and built collaboratively
-•	producing reliable data (not at medical-grade precision, but stable enough to serve as the basis for narrative analysis)
+
+
+**•	affordable**
+
+
+•	**open source and built collaboratively**
+
+
+**•	producing reliable data** (not at medical-grade precision, but stable enough to serve as the basis for narrative analysis)
 
 
 The current testing phase, which precedes the release of the first version **WKd_01.01**, has required some compromises. 
