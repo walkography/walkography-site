@@ -3,13 +3,12 @@ import { getCollection, render } from 'astro:content';
 import Footer from '../components/Footer.astro';
 import Hamburger from '../components/Hamburger.astro';
 import '../styles/global.css';
-import NetlifyImage from "../components/NetlifyImage.astro";
 
 const allPages = await getCollection('pages');
-const page = allPages.find(p => p.id === 'about');
+const page = allPages.find(p => p.id === 'legal');
 
 if (!page) {
-  throw new Error(`Pagina 'about' non trovata. ID disponibili: ${allPages.map(p => p.id).join(', ')}`);
+  throw new Error(`Pagina 'legal' non trovata. ID disponibili: ${allPages.map(p => p.id).join(', ')}`);
 }
 
 const { Content } = await render(page);
@@ -17,32 +16,15 @@ const { Content } = await render(page);
 
 <html lang="en">
   <head>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{page!.data.titolo} — Walkography</title>
-    <meta name="description" content="About Walkography: il progetto, il metodo, il cammino come pratica cartografica." />
+    <meta name="description" content="Legal notice and privacy information for Walkography." />
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
-        <!-- ===== Open Graph ===== -->
-    <meta property="og:title" content="About — Walkography" />
-    <meta property="og:description" content="About Walkography: il progetto, il metodo, il cammino come pratica cartografica." />
-    <meta property="og:image" content="https://walkography.eu/og-default.jpg" />
-    <meta property="og:url" content="https://walkography.eu/about" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Walkography" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="About — Walkography" />
-    <meta name="twitter:description" content="About Walkography: il progetto, il metodo." />
-    <meta name="twitter:image" content="https://walkography.eu/og-default.jpg" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
   </head>
-
   <body>
     <Hamburger />
     <header class="testata">
@@ -70,17 +52,15 @@ const { Content } = await render(page);
 
     <Footer />
     <script>
-  // Reindirizza al pannello quando ricevi un invito via email
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
         });
       }
-    });
-  }
-</script>
+    </script>
   </body>
 </html>
-

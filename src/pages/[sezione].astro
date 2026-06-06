@@ -33,6 +33,8 @@ const cards = posts.sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf()
 <html lang="en">
 
   <head>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{info.titolo} — Walkography</title>
@@ -89,9 +91,11 @@ const cards = posts.sort((a, b) => b.data.data.valueOf() - a.data.data.valueOf()
     
     {cards.map((c) => (
         <a href={`/${sezione}/${c.id}`} class={`card card-${info.coloreCard} card-${c.data.taglia || 'media'}`}>
+          <div class="card-top">
           <span class="card-data">{c.data.data.toLocaleDateString('it-IT')}</span>
           {c.data.titolo && <h2 class="card-titolo">{c.data.titolo}</h2>}
-          {c.data.immagine && <NetlifyImage src={c.data.immagine} alt={c.data.titolo ?? ""} width={262} height={262} class="card-immagine" sizes="(max-width: 600px) 50vw, 262px" />}
+          </div>
+          {c.data.immagine && <img src={c.data.immagine} alt="" class="card-immagine" />}
           {c.data.estratto && <p class="card-testo">{c.data.estratto}</p>}
         </a>
       ))}
