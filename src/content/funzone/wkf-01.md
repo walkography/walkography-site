@@ -1,8 +1,9 @@
 ---
-titolo: "WKf #01"
+titolo: WKf# How to use the Fanzine
 data: 2026-05-26
-taglia: media
+taglia: piccola
 estratto: ""
 ---
+**How to use the fanzine**:
 
-Prima uscita della Funzone — note di campo e divagazioni.
+![](/uploads/fanzine-instructions.png)
