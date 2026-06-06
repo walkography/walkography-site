@@ -1,5 +1,8 @@
 ---
-titolo: "About"
+titolo: About
+descrizione: "The walking-based research practice of architect Giulio Mari:
+  mapping the perception of territory through self-built devices, dérives and
+  cartographies."
 ---
 
 **Walkography** is a research practice that aims to make the perception of territory explicit. Conventional readings of territory and the phenomenological approach have rarely found a way to coexist and feed one another. 
