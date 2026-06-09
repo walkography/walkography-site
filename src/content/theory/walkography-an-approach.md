@@ -2,6 +2,12 @@
 titolo: Walkography, an approach
 data: 2026-06-11
 taglia: media
+estratto: "Walkography is a construction that takes shape as its practical and
+  experimental work advances. For that very reason, the texts and publications
+  gathered here will certainly contain inconsistencies and explicit doubts —
+  nothing other than the result of this continuous searching, erring, trying and
+  recalibrating: the result, that is, of an open and transparent research
+  process."
 descrizione: "An approach: walking as method, perception as data, and the map as
   abstraction — the founding principles behind Walkography's narrative
   cartographies."
