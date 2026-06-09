@@ -45,7 +45,7 @@ Ten years on from that first formulation, Walkography has evolved through the bu
 
 The theoretical foundations of Walkography lie in the research plan of an unfinished doctoral thesis written in 2016. The texts in this section gather and expand on those early writings; some passages may therefore carry the mark of their time. Updating and growing this corpus is one of the project's aims.
 
-\------------------------------------------------------------------------------------------------------------------------------
+\-----------
 
 > 1. Solà Morales, Manuel; Parcerisa, J. La forma d’un pais. A: La identitat del territori catalá- les co-marques- Quaderns d’arquitectura i urbanisme - numero extra. Barcelona: 1981.
 > 2. García, J.C. Atlas de paisaje de la memoria - Galicia 1579 - 1865. 2015.
