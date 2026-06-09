@@ -4,6 +4,7 @@ import Footer from '../../components/Footer.astro';
 import Hamburger from '../../components/Hamburger.astro';
 import '../../styles/global.css';
 import NetlifyImage from "../../components/NetlifyImage.astro";
+import NewsletterSignup from '../../components/NewsletterSignup.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('theory');
@@ -40,6 +41,8 @@ const colori: Record<string, string> = {
 
 <html lang="en">
   <head>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{post.data.titolo} — Walkography</title>
@@ -85,11 +88,23 @@ const colori: Record<string, string> = {
     <article class="post">
       <span class="post-data">{post.data.data.toLocaleDateString('it-IT')} </span>
       <h2 class="post-titolo">{post.data.titolo}</h2>
-      {post.data.immagine && <NetlifyImage src={post.data.immagine} alt={post.data.titolo} width={1000} class="post-immagine" sizes="(max-width: 1000px) 100vw, 1000px" loading="eager" fetchpriority="high" />}
+  {post.data.immagine && (
+    <NetlifyImage
+      src={post.data.immagine}
+      alt={post.data.titolo}
+      width={1000}
+      class="post-immagine"
+      sizes="(max-width: 1000px) 100vw, 1000px"
+      loading="eager"
+      fetchpriority="high"
+    />
+  )}
       <div class="post-corpo">
         <Content />
       </div>
     </article>
+
+    <NewsletterSignup />
 
     {correlati.length > 0 && (
       <section class="correlati">
@@ -99,13 +114,23 @@ const colori: Record<string, string> = {
             <a href={`/${c.sezione}/${c.id}`} class={`card card-${colori[c.sezione]} card-${c.data.taglia || 'media'}`}>
                 <span class="card-data">{c.data.data.toLocaleDateString('it-IT')} - {c.sezione}</span>
                 {c.data.titolo && <h4 class="card-titolo">{c.data.titolo}</h4>}
-                {c.data.immagine && <NetlifyImage src={c.data.immagine} alt={c.data.titolo ?? ""} width={262} height={262} class="card-immagine" sizes="(max-width: 600px) 50vw, 262px" />}
+                {c.data.immagine && (
+                  <NetlifyImage
+                    src={c.data.immagine}
+                    alt={c.data.titolo ?? ""}
+                    width={262}
+                    height={262}
+                    class="card-immagine"
+                    sizes="(max-width: 600px) 50vw, 262px"
+                  />
+                )}
                 {c.data.estratto && <p class="card-testo">{c.data.estratto}</p>}
             </a>
             ))}
         </div>
       </section>
     )}
+    
     <Footer />
     <script>
   // Reindirizza al pannello quando ricevi un invito via email

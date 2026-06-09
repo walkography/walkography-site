@@ -4,6 +4,7 @@ import Footer from '../../components/Footer.astro';
 import Hamburger from '../../components/Hamburger.astro';
 import '../../styles/global.css';
 import NetlifyImage from "../../components/NetlifyImage.astro";
+import NewsletterSignup from '../../components/NewsletterSignup.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('funzone');
@@ -95,6 +96,8 @@ const colori: Record<string, string> = {
         <Content />
       </div>
     </article>
+
+    <NewsletterSignup />
 
     {correlati.length > 0 && (
       <section class="correlati">

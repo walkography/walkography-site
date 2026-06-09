@@ -1,0 +1,43 @@
+
+---
+// src/components/NewsletterSignup.astro
+---
+<section class="newsletter">
+  <h2>Get the next dérive</h2>
+ 
+<form
+  action="https://buttondown.com/api/emails/embed-subscribe/walkography"
+  method="post"
+  class="embeddable-buttondown-form"
+>
+  <label for="bd-email">Enter your email</label>
+  <input type="hidden" value="1" name="embed" />
+  <input type="email" name="email" id="bd-email" />
+  <input type="submit" value="Subscribe" />
+ 
+</form>
+
+<style>
+  .newsletter {
+    text-align: center;          /* centra tutto */
+    max-width: 34rem;
+    margin: 2rem auto 0rem;      /* il 5rem = distanza dal post sopra */
+    padding-top: 2rem;
+  }
+  .newsletter h2 {
+    font-size: 1.1rem;  
+    font-family: var(--font-titolo);         /* titolo più piccolo */
+    margin-bottom: 0.4rem;
+  }
+  .newsletter p {
+    font-size: 0.85rem;          /* descrizione più piccola */
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
+  .newsletter form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+</style>

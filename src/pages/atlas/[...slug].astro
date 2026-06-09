@@ -4,6 +4,7 @@ import Footer from '../../components/Footer.astro';
 import Hamburger from '../../components/Hamburger.astro';
 import '../../styles/global.css';
 import NetlifyImage from "../../components/NetlifyImage.astro";
+import NewsletterSignup from '../../components/NewsletterSignup.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('atlas');
@@ -41,6 +42,7 @@ const colori: Record<string, string> = {
 <html lang="en">
   <head>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{post.data.titolo} — Walkography</title>
@@ -94,6 +96,8 @@ const colori: Record<string, string> = {
         <Content />
       </div>
     </article>
+
+    <NewsletterSignup />
 
     {correlati.length > 0 && (
       <section class="correlati">
