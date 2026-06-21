@@ -17,6 +17,8 @@ correlati:
 
 realized with WKd_01.01 device
 
+![](/uploads/post-01.webp)
+
 The first week of real heat has just ended — the first hot enough to sleep with windows open. Summer feels early again; jackets gave way to shorts in days. Today promises more sun, though the morning breeze is still cool and the buildings shade the first stretch.
 
 **\#1_**I wait for the wkd_01.01 to lock onto the satellites and tell me, via the LED, the sensors are ready. I begin this first experimental drift, and almost no one seems to notice the device strapped to my arm.
@@ -32,7 +34,5 @@ A small pause before the last stretch, from Arc de Triomf to the studio.
 **\#5_**Near the arch the view opens again: tourists, bikes, e-bikes, scooters, more tourists, couriers, buses, mopeds… it fades along c/Trafalgar, back in shade, past the bars for tourists and expats that define the Born. The device hasn't drawn attention anywhere — except at Trafalgar and Méndez Núñez, where the urban police, stopped at the lights, noticed it with curiosity.
 
 The last metres aren't quite usual: another bar for foreigners has opened — the kind that looks effortlessly cool but is soulless and inexplicably expensive. Fede's bar has closed; word is there'll be a shawarma place. The one saving grace is Liliana, the unfriendly doorkeeper, mopping the pavement as always. No smile. I go in, switch off the wkd_01.01
-
-![](/uploads/post-01.webp "WKa_01 Map")
 
 ![Wka_01 zooms](/uploads/post-02.webp)
