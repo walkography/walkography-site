@@ -1,7 +1,7 @@
 ---
 titolo: WKa_01 First Test Drift From home to the office
 data: 2026-06-22
-taglia: grande
+taglia: media
 immagine: ""
 estratto: "This is the first walkography recorded with the WKd_01.01 device. It
   traces a familiar daily path: the walk from my home to the office."
