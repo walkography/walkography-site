@@ -2,7 +2,7 @@
 titolo: WKa_01 First Test Drift From home to the office
 data: 2026-06-22
 taglia: grande
-immagine: /uploads/map-for-portada-01.jpg
+immagine: ""
 estratto: "This is the first walkography recorded with the WKd_01.01 device. It
   traces a familiar daily path: the walk from my home to the office."
 descrizione: An Experimental Urban Drift Through Barcelona Using Environmental
@@ -33,6 +33,6 @@ A small pause before the last stretch, from Arc de Triomf to the studio.
 
 The last metres aren't quite usual: another bar for foreigners has opened — the kind that looks effortlessly cool but is soulless and inexplicably expensive. Fede's bar has closed; word is there'll be a shawarma place. The one saving grace is Liliana, the unfriendly doorkeeper, mopping the pavement as always. No smile. I go in, switch off the wkd_01.01
 
-![](/uploads/post-01.jpg "WKa_01 Map")
+![](/uploads/post-01.webp "WKa_01 Map")
 
-![Wka_01 zooms](/uploads/post-02.jpg)
+![Wka_01 zooms](/uploads/post-02.webp)
