@@ -9,9 +9,9 @@ descrizione: An Experimental Urban Drift Through Barcelona Using Environmental
   and Biometric Sensors
 correlati:
   - sezione: laboratory
-    slug: https://www.walkography.eu/laboratory/wkd_01-01--preview/
+    slug: wkd_01-01--preview
   - sezione: theory
-    slug: https://www.walkography.eu/theory/walkography-an-approach/
+    slug: walkography-an-approach
 ---
 **Barcelona, Monday 01 of June 2026**
 
