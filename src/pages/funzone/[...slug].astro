@@ -92,6 +92,11 @@ const colori: Record<string, string> = {
       <span class="post-data">{post.data.data.toLocaleDateString('it-IT')} </span>
       <h2 class="post-titolo">{post.data.titolo}</h2>
       {post.data.immagine && <NetlifyImage src={post.data.immagine} alt={post.data.titolo} width={1000} class="post-immagine" sizes="(max-width: 1000px) 100vw, 1000px" loading="eager" fetchpriority="high" />}
+      {post.data.pdf && (
+        <a href={post.data.pdf} class="pdf-download" download target="_blank" rel="noopener">
+          ↓ {post.data.pdf_label || "Scarica il PDF"}
+        </a>
+      )}
       <div class="post-corpo">
         <Content />
       </div>

@@ -74,6 +74,8 @@ collections:
       - { label: "Immagine", name: "immagine", widget: "image", required: false }
       - { label: "Estratto", name: "estratto", widget: "text", required: false }
       - { label: "Descrizione SEO", name: "descrizione", widget: "text", required: false }
+      - { label: "PDF scaricabile", name: "pdf", widget: "file", required: false, hint: "Carica qui il fanzine o altro PDF da rendere scaricabile" }
+      - { label: "Etichetta bottone download", name: "pdf_label", widget: "string", required: false, default: "Scarica il PDF", hint: "Testo del bottone, es. 'Scarica il fanzine UIA 2026'" }
       - label: "Articoli correlati"
         name: "correlati"
         widget: "list"

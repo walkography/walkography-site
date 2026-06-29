@@ -9,6 +9,8 @@ const baseSchema = z.object({
   immagine: z.string().optional(),
   estratto: z.string().optional(),
   descrizione: z.string().optional(),
+  pdf: z.string().optional(),
+  pdf_label: z.string().optional(),
   correlati: z.array(z.object({
     sezione: z.enum(['theory', 'atlas', 'funzone', 'laboratory', 'news']),
     slug: z.string(),
