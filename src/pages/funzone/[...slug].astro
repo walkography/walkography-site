@@ -56,6 +56,8 @@ const colori: Record<string, string> = {
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Walkography" />
 
+    <link rel="canonical" href={`https://walkography.eu/funzone/${post.id}`} />
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={`${post.data.titolo} — Walkography`} />
     <meta name="twitter:description" content={post.data.descrizione || post.data.estratto || ""} />
