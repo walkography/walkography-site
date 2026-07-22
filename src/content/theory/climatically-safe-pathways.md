@@ -10,6 +10,9 @@ estratto: "Climatically safe pathways: not static points to take refuge in, but
 descrizione: Barcelona's heat-routing tool (formerly Cool Walks) now suggests
   the coolest path across the city. I compared it to Walkography's body-based
   method — here's what the data can't see.
+correlati:
+  - sezione: atlas
+    slug: wka_01-first-test-drift-from-home-to-the-office
 ---
 Between June and July, Barcelona hosted the UIA World Congress of Architects. I was only able to attend the first day, dedicated to two central themes: **Becoming More Than Human and Becoming Circular.**
 
