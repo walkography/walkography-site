@@ -1,7 +1,7 @@
 ---
 titolo: WKa_00 The first Walkography
 data: 2026-06-04
-taglia: grande
+taglia: media
 immagine: /uploads/ig_low.webp
 estratto: WKa_00 is the walkography that best describeswhat the project is
   about. Itrecords a walk through the Oma forest (Kortezubi, Bizkaia) on
