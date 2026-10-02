@@ -26,7 +26,7 @@ I don't know whether this is due to outdated mapping that hasn't yet registered 
 
 **Thesegments: where the "shade" criterion works**
 
-Past theintersection of C/ Meridiana and C/ Aragó (#1), I'm struck by the sheer amountof tree cover, its excellent condition, and the shade it actually provides. Asmy sense of straying from the most efficient route grows step by step, so doesthe clear sense that this route offers a higher level of comfort. In choosingmy own routes I tend to look for the best compromise between urban quality andlength, giving the intangible a weight comparable to other parameters likesafety and climatic comfort — but here the app applies that same compromisemore radically (or more simply) than I would, sacrificing distance for shade.
+Past theintersection of C/ Meridiana and C/ Aragó (#1), I'm struck by the sheer amountof tree cover, its excellent condition, and the shade it actually provides. Asmy sense of straying from the most efficient route grows step by step, so doesthe clear sense that this route offers a higher level of comfort. In choosingmy own routes I tend to look for the best compromise between urban quality andlength, giving the intangible a weight comparable to other parameters likesafety and climatic comfort — but here the app applies that same compromisemore radically (or  more simply) than I would, sacrificing distance for shade.
 
 This is thefirst building block of the thesis: on the continuous segment, the criterionworks well.
 
@@ -36,17 +36,17 @@ This is thefirst building block of the thesis: on the continuous segment, the cr
 
 At C/Castillejos, once past the park, the route turns south to rejoin the moredirect path. This is where a sequence of crossings of major infrastructurebegins — the route's real test, and its weak point.
 
-Thecrossing at C/ Aragó (#2) was quick — whether due to a specific traffic-lightpolicy or simple luck, I don't know. The Av. Diagonal crossing (#3) happens ina traffic-calmed stretch: no long waits, always in shade. But the Gran Viacrossing (#4) undoes the whole effort of having strayed from the main route.The wait in the sun, the noise, and the resulting spike in stress were strongenough to make the rest of the walk feel hard.
+The crossing at C/ Aragó (#2) was quick — whether due to a specific traffic-lightpolicy or simple luck, I don't know. The Av. Diagonal crossing (#3) happens ina traffic-calmed stretch: no long waits, always in shade. But the Gran Viacrossing (#4) undoes the whole effort of having strayed from the main route.The wait in the sun, the noise, and the resulting spike in stress were strongenough to make the rest of the walk feel hard.
 
 The datahere is interesting precisely because it's ambiguous, and it's worth notflattening it: environmental comfort values after Gran Via remain comparable tothose on my habitual route, but the physiological data tells a different story— a lower perceived comfort, with a slightly slower pace. The memory, beyondthe recorded data, is one of considerable discomfort. The node doesn't worsenthe measurable environmental conditions — but it degrades the experience in away the app, optimizing for shade along segments, doesn't see.
 
 A singlecrossing, on a single day, by a single person, isn't enough to isolate Gran Viafrom other variables (accumulated heat, fatigue, the fact that this route wasnew to me) — but it was nonetheless an event that marked this test, and onethat could recur, perhaps on that same Gran Via, perhaps on Aragó, perhaps onMeridiana...
 
-Wherethe criterion breaks down in my favor
+**Wherethe criterion breaks down in my favor**
 
 In the verylast stretch, at the Pg. Sant Joan crossing (#6), the AMB route outperforms myhabitual one: it avoids the more complex intersection near the Arc de Triomfand crosses a bit further up, where the number of signal cycles drops from 3 to2, still in shade, with a notably fine view of the arch. This is thecounter-proof of the thesis: when the app manages to treat a node as part ofthe criterion — not just the segment before and after it — the result improvesmarkedly.
 
-Conclusion
+**Conclusion**
 
 AMB's"cool" route treats the journey as a sum of shaded segments, not as asequence of thresholds to be crossed: it excels at the first task and fails,almost systematically, at the second — except where, as at Pg. Sant Joan, thenode itself is treated as a segment to optimize.
 
