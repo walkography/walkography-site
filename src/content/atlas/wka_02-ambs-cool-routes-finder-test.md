@@ -12,7 +12,7 @@ correlati:
   - sezione: theory
     slug: climatically-safe-pathways
 ---
-**Cool routes vs. habitual route – summer 2026**
+**Cool routes vs. habitual route – summer's heatwaves 2026**
 
 The two routes shown here were walked during the 2026 heatwaves: the first is the one suggested by AMB's cercador d'itineraris frescos (cool-route finder), the second is my habitual route to work ([here te full post](https://walkography.eu/atlas/wka_01-first-test-drift-from-home-to-the-office/)).
 
